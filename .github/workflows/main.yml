@@ -55,7 +55,7 @@ jobs:
             git reset --hard origin/main &&
             git pull origin main &&
             docker build -t node-ec2-docker . &&
-            docker run --name node-ec2-docker -d -p "$PORT":"$PORT" node-ec2-docker:latest       
+            docker run --name node-ec2-docker -d -p 3006:3006 node-ec2-docker:latest       
           '
         env:
           ENV: ${{ secrets.ENV }}
