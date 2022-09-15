@@ -44,7 +44,7 @@ jobs:
         continue-on-error: true
         run: ssh staging 'docker stop node-ec2-docker && docker rm node-ec2-docker'
         
-      - name: clone-repo
+      - name: clone-repo-docker-build-deploy
         run: |
           ssh staging '
             ## GET INTO THE REPO
@@ -60,9 +60,3 @@ jobs:
         env:
           ENV: ${{ secrets.ENV }}
           PORT: 3006
-        
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
