@@ -33,7 +33,6 @@ jobs:
             StrictHostKeyChecking no
           END
         env:
-          environment: ${{ secrets.ENV }}
           GIT_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
           GIT_USER: ${{ secrets.GIT_USER_NAME }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
@@ -41,9 +40,26 @@ jobs:
           SSH_PORT: ${{ secrets.SSH_PORT }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
 
+      - name: stop-docker
+        continue-on-error: true
+        run: ssh staging 'docker stop node-ec2-docker && docker rm node-ec2-docker'
+        
       - name: clone-repo
         run: |
-          ssh staging 'echo "hello"'
+          ssh staging '
+            ## GET INTO THE REPO
+            cd ~/node.js-actions-deploy &&
+            echo "$ENV" > .env &&
+            git checkout main &&
+            git fetch --all &&
+            git reset --hard origin/main &&
+            git pull origin main &&
+            docker build -t node-ec2-docker . &&
+            docker run --name node-ec2-docker -p 3006:3006 node-ec2-docker:latest       
+          '
+        env:
+          ENV: ${{ secrets.ENV }}
+          PORT: 3006
         
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
