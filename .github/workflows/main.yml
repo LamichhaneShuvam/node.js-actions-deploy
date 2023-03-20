@@ -9,9 +9,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-env:
-  ENV: ${{secrets.ENV}}
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -43,6 +40,11 @@ jobs:
           SSH_PORT: ${{ secrets.SSH_PORT }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
 
+      - name: env-file-transfer
+        run: scp ${{secrets.ENV}} ~/node.js-actions-deploy staging:~/node.js-actions-deploy/.env          
+        env:
+          ENV: ${{secrets.ENV}}
+
       - name: stop-docker
         continue-on-error: true
         run: ssh staging 'docker stop node-ec2-docker && docker rm node-ec2-docker'
@@ -52,7 +54,6 @@ jobs:
           ssh staging '
             ## GET INTO THE REPO
             cd ~/node.js-actions-deploy &&
-            echo "$ENV" > .env &&
             git checkout main &&
             git fetch --all &&
             git reset --hard origin/main &&
