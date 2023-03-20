@@ -25,7 +25,7 @@ jobs:
       - name: ssh-ing
         run: |
           ##REMOVE_TIS
-          echo "Hello world" >> "$name"
+          echo "name='hellllllloooooo'" >> $GITHUB_OUTPUT
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
