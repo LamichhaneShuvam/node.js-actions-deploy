@@ -47,12 +47,13 @@ jobs:
 
       - name: env-file-transfer
         run: |
-          echo ${{ needs.ssh-ing.outputs.name }}
+          echo $NAME
           echo "HELLO WORLD"
           echo $ENV > .env
           scp .env staging:node.js-actions-deploy/.env
         env:
           ENV: ${{secrets.ENV}}
+          NAME: ${{ needs.ssh-ing.outputs.name }}
 
       - name: stop-docker
         continue-on-error: true
