@@ -50,7 +50,7 @@ jobs:
             ## GET INTO THE REPO
             echo "$ENV"  &&
             cd ~/node.js-actions-deploy &&
-            echo "$ENV" > .env &&
+            cat "$ENV" > .env &&
             git checkout main &&
             git fetch --all &&
             git reset --hard origin/main &&
