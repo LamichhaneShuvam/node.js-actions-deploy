@@ -42,7 +42,7 @@ jobs:
 
       - name: env-file-transfer
         run: |
-          echo $ENV base64 --decode > .env
+          echo $ENV > .env
           scp .env staging:node.js-actions-deploy/
         env:
           ENV: ${{secrets.ENV}}
