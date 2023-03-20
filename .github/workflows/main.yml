@@ -26,7 +26,6 @@ jobs:
         run: |
           ##REMOVE_TIS
           echo "name='hellllllloooooo'" >> $GITHUB_OUTPUT
-          ls -a
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
@@ -48,6 +47,7 @@ jobs:
 
       - name: env-file-transfer
         run: |
+          ls -a
           ##echo $NAME
           echo "HELLO WORLD"
           echo $ENV > .env
