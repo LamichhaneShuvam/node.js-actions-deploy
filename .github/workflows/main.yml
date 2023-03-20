@@ -41,9 +41,7 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
 
       - name: env-file-transfer
-        run: |
-          echo ${{ENV} > .env
-          scp .env staging:/node.js-actions-deploy   
+        run: echo ${{ENV} > .env && scp .env staging:/node.js-actions-deploy   
         env:
           ENV: ${{secrets.ENV}}
 
