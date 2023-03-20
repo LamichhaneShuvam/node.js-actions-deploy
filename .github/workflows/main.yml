@@ -48,7 +48,6 @@ jobs:
         run: |
           ssh staging '
             ## GET INTO THE REPO
-            echo "$ENV"  &&
             cd ~/node.js-actions-deploy &&
             cat "$ENV" > .env &&
             git checkout main &&
