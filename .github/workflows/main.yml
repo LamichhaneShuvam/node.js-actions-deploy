@@ -21,7 +21,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: ssh-ing
         run: |
-          echo $HOSTNAME
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
