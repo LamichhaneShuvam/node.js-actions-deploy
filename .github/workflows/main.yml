@@ -48,6 +48,7 @@ jobs:
       - name: env-file-transfer
         run: |
           echo ${{ needs.ssh-ing.outputs.name }}
+          echo "HELLO WORLD"
           echo $ENV > .env
           scp .env staging:node.js-actions-deploy/.env
         env:
