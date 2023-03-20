@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  ENV: '${{secrets.ENV}}'
+  ENV: ${{secrets.ENV}}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -60,6 +60,3 @@ jobs:
             docker build -t node-ec2-docker . &&
             docker run --name node-ec2-docker -d -p 3006:3006 node-ec2-docker:latest       
           '
-        env:
-          ENV: ${{ secrets.ENV }}
-          PORT: 3006
