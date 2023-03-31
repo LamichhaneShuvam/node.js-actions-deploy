@@ -15,17 +15,12 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    #output for jobs
-    outputs:
-      name: ${{steps.ssh-ing.outputs.name}}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v3
       - name: ssh-ing
         run: |
-          ##REMOVE_TIS
-          echo "::set-output name=NAME::'__HELLO__'"
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
@@ -47,7 +42,6 @@ jobs:
 
       - name: env-file-transfer
         run: |
-          echo $NAME
           echo $ENV > .env
           scp .env staging:node.js-actions-deploy/.env
         env:
