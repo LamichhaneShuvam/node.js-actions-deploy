@@ -25,7 +25,7 @@ jobs:
       - name: ssh-ing
         run: |
           ##REMOVE_TIS
-          echo "::set-output name=name::'__HELLO__'"
+          echo "::set-output name=NAME::'__HELLO__'"
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
@@ -52,7 +52,6 @@ jobs:
           scp .env staging:node.js-actions-deploy/.env
         env:
           ENV: ${{secrets.ENV}}
-          NAME: ${{ needs.ssh-ing.outputs.name }}
 
       - name: stop-docker
         continue-on-error: true
