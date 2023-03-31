@@ -47,9 +47,7 @@ jobs:
 
       - name: env-file-transfer
         run: |
-          ls -a
-          ## echo $NAME
-          echo "HELLO WORLD"
+          echo $NAME
           echo $ENV > .env
           scp .env staging:node.js-actions-deploy/.env
         env:
